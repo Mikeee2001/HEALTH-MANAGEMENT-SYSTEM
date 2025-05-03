@@ -1,4 +1,4 @@
-<div class="modal fade viewDoctorModal" tabindex="-1" aria-hidden="true">
+<div class="modal  viewDoctorModal" tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,28 +6,32 @@
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" onclick="closeModal()"></button>
             </div>
             <div class="modal-body">
+
                 {{-- <div class="form-outline mb-3 text-center">
                     <img id="viewDoctorImage" class="img-fluid img-thumbnail" alt="Doctor Image" style="width: 150px; height: 150px;" />
                 </div> --}}
+
                 <div class="form-outline mb-3">
                     <input type="text" id="viewFirstname" class="form-control" readonly />
-                    <label class="form-label" for="viewFirstname"></label>
+                    <label class="form-label" for="viewFirstname">Firstname</label>
                 </div>
+
                 <div class="form-outline mb-3">
                     <input type="text" id="viewLastname" class="form-control" readonly />
-                    <label class="form-label" for="viewLastname"></label>
+                    <label class="form-label" for="viewLastname">Lastname</label>
                 </div>
+
                 <div class="form-outline mb-3">
                     <input type="text" id="viewSpecialty" class="form-control" readonly />
-                    <label class="form-label" for="viewSpecialty"></label>
+                    <label class="form-label" for="viewSpecialty">Specialty</label>
                 </div>
                 <div class="form-outline mb-3">
                     <input type="text" id="viewQualification" class="form-control" readonly />
-                    <label class="form-label" for="viewQualification"></label>
+                    <label class="form-label" for="viewQualification">Qualification</label>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
+                <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal" onclick="closeModal()">Close</button>
             </div>
         </div>
     </div>

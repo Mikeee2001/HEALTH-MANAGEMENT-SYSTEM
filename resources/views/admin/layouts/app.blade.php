@@ -9,7 +9,9 @@
     <title>
         HealthCare Management System
     </title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -17,7 +19,8 @@
      {{-- <link href="{{asset('argon')}}/assets/css/nucleo-icons.css" rel="stylesheet" />
      <link href="{{asset('argon')}}/assets/css/ncleo-svg.css" rel="stylesheet" /> --}}
     <!-- Font Awesome Icons -->
-    {{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script> --}}
+     {{-- <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>  --}}
+
 
     <link  src="{{asset('assets')}}/css/mdb.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('assets')}}/css/datatable.min.css"></link>
@@ -88,6 +91,7 @@ if (win && document.querySelector('#sidenav-scrollbar')) {
     <script src="{{asset('assets')}}/js/doctors.js"></script>
     <script src="{{asset('assets')}}/js/javascript/axios.min.js"></script>
     <script src="{{asset('argon')}}/assets/js/core/bootstrap.min.js"></script>
+    <script src="{{asset('assets')}}/js/users.js"></script>
 
 
 

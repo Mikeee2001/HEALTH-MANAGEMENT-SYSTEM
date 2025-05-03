@@ -1,5 +1,5 @@
 <!-- Doctor Modal -->
-<div class="modal fade addDoctorModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade addDoctorModal" tabindex="-1">
 
 {{-- <div class="modal doctorModal" tabindex="-1" role="dialog"> --}}
     <div class="modal-dialog" role="document">
@@ -40,8 +40,9 @@
 
             <div class="modal-footer">
                 <button id="saveButton" type="button" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
-            </div>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"onclick="closeModal()">Close</button>
+          </div>
         </div>
+
     </div>
 </div>

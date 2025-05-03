@@ -45,7 +45,7 @@ class DoctorController extends Controller
         ]);
 
         if ($request->hasFile('doctor_image')) {
-            $imagePath = $request->file('doctor_image')->store('public/doctor_images');
+            $imagePath = $request->file('doctor_image')->store('public/doctor_image');
             $validatedData['doctor_image'] = str_replace('public/', '', $imagePath);
         }
 
@@ -69,27 +69,56 @@ class DoctorController extends Controller
     }
 
     public function updateDoctor(Request $request, $id)
-    {
-        // Fetch or create doctor record
-        $doctor = Doctors::updateOrCreate(
-            ['id' => $id],
-            [
-                'firstname' => $request->firstname,
-                'lastname' => $request->lastname,
-                'specialty' => $request->specialty,
-                'qualification' => $request->qualification,
-            ]
-        );
+{
+    // Validate the incoming request, allowing fields to be optional
+    $validatedData = $request->validate([
+        'firstname' => 'nullable|string|max:255',
+        'lastname' => 'nullable|string|max:255',
+        'specialty' => 'nullable|string|max:255',
+        'qualification' => 'nullable|string|max:255',
+        'doctor_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        // Handle doctor image upload
-        if ($request->hasFile('doctor_image')) {
-            $imagePath = $request->file('doctor_image')->store('public/storage/doctor_images');
-            $doctor->doctor_image = basename($imagePath);
-            $doctor->save(); // Save the updated record with the image
+    // Fetch the doctor record
+    $doctor = Doctors::findOrFail($id);
+
+    // Conditionally update each field if it is present in the request
+    if ($request->has('firstname')) {
+        $doctor->firstname = $validatedData['firstname'];
+    }
+
+    if ($request->has('lastname')) {
+        $doctor->lastname = $validatedData['lastname'];
+    }
+
+    if ($request->has('specialty')) {
+        $doctor->specialty = $validatedData['specialty'];
+    }
+
+    if ($request->has('qualification')) {
+        $doctor->qualification = $validatedData['qualification'];
+    }
+
+    // Handle doctor image upload
+    if ($request->hasFile('doctor_image')) {
+        // Delete the old image if it exists
+        if ($doctor->doctor_image) {
+            \Storage::delete('public/doctor_image/' . $doctor->doctor_image);
         }
 
-        return response(["message" => "Doctor updated successfully"], 200);
+        // Store new image
+        $imagePath = $request->file('doctor_image')->store('public/doctor_image');
+        $doctor->doctor_image = str_replace('public/', '', $imagePath);
     }
+
+    // Save updated doctor information
+    $doctor->save();
+
+    return response()->json([
+        "message" => "Doctor updated successfully",
+        "doctor" => $doctor
+    ], 200);
+}
 
 
 }

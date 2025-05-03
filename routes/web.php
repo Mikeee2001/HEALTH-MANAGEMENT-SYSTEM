@@ -22,8 +22,11 @@ use App\Http\Controllers\Admin\TransactionController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 })->name('home');
 
 Route::get('/appointments', [TransactionController::class, 'viewAppointments'])->name('profile');

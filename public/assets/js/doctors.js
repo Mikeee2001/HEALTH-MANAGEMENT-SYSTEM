@@ -54,13 +54,13 @@ $(document).ready(function () {
                             `<div>${item.specialty}</div>`,
                             `<div>${item.qualification}</div>`,
                             `<div class="d-flex justify-content-around custom-buttons">
-                                <a class="btn btn-info btn-sm"
+                                <a class="btn btn-info btn-lg"
                                 onclick="viewDoctor('${item.firstname}', '${item.lastname}', '${item.specialty}', '${item.qualification}')"
                                 type="button">
                                 <i class="fas fa-eye custom-icon"></i>
                                 </a>
-                                <a class="btn btn-warning btn-sm editButton mx-1" data-id="${item.id}" type="button"><i class="fas fa-edit custom-icon"></i></a>
-                                <a class="btn btn-danger btn-sm deleteButton" data-id="${item.id}" type="button"><i class="fas fa-trash custom-icon"></i></a>
+                                <a class="btn btn-warning btn-lg editButton mx-1" data-id="${item.id}" type="button"><i class="fas fa-edit custom-icon"></i></a>
+                                <a class="btn btn-danger btn-lg deleteButton" data-id="${item.id}" type="button"><i class="fas fa-trash custom-icon"></i></a>
                              </div>`
                         ]);
                     });
@@ -80,7 +80,7 @@ $(document).ready(function () {
 
 
     $('.btnAddDoctor').on('click', function () {
-        $('.addDoctorModal').modal('show');
+        $('.addDoctorModal').modal('show').removeAttr('aria-hidden');
     });
 
 
@@ -141,28 +141,45 @@ $(document).ready(function () {
                     $('#updateSpecialty').val(doctor.specialty);
                     $('#updateQualification').val(doctor.qualification);
 
+                    // If image exists, display the current image in the modal
+                    if (doctor.doctor_image) {
+                        $('#currentDoctorImage').attr('src', `/storage/doctor_image/${doctor.doctor_image}`);
+                    } else {
+                        $('#currentDoctorImage').attr('src', ''); // Clear image if none exists
+                    }
+
                     // Show modal
                     $('.editDoctorModal').modal('show');
 
                     $('#updateButton').off('click').on('click', function () {
-                        // Update doctor data
-                        axios.post(`/api/auth/update-doctor/${doctorId}`, {
+                        var formData = new FormData();
+                        formData.append('firstname', $('#updateFirstname').val().trim());
+                        formData.append('lastname', $('#updateLastname').val().trim());
+                        formData.append('specialty', $('#updateSpecialty').val().trim());
+                        formData.append('qualification', $('#updateQualification').val().trim());
 
-                            firstname: $('#updateFirstname').val().trim(),
-                            lastname: $('#updateLastname').val().trim(),
-                            specialty: $('#updateSpecialty').val().trim(),
-                            qualification: $('#updateQualification').val().trim(),
+                        // Append image if uploaded
+                        var fileInput = $('#updateDoctor_image')[0].files[0];
+                        if (fileInput) {
+                            formData.append('doctor_image', fileInput);
+                        }
 
-                        }).then(() => {
-                            console.log("Update success! Refreshing table...");
-                            $('.editDoctorModal').modal('hide');
-                            displayDoctors(); // Refresh doctor list
-                            toastr.success("Doctor updated successfully!");
-                        }).catch(() => {
-                            toastr.error("Failed to update the doctor. Please try again.");
-                        });
+                        // Send update request with the form data
+                        axios.post(`/api/auth/update-doctor/${doctorId}`, formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                            },
+                        })
+                            .then(() => {
+                                console.log("Update success! Refreshing table...");
+                                $('.editDoctorModal').modal('hide');
+                                displayDoctors(); // Refresh doctor list
+                                toastr.success("Doctor updated successfully!");
+                            })
+                            .catch(() => {
+                                toastr.error("Failed to update the doctor. Please try again.");
+                            });
                     });
-
                 } else {
                     toastr.error("Failed to fetch doctor data.");
                 }
@@ -182,7 +199,6 @@ $(document).ready(function () {
             axios.delete(`/api/auth/delete-doctor/${doctorId}`)
                 .then(function (response) {
                     if (response.data.success) {
-                        // console.log("Doctor deleted successfully:", response.data.message);
                         displayDoctors(); // Refresh the table with updated data
                         toastr.success("Doctor deleted successfully!");
                     } else {
@@ -198,12 +214,13 @@ $(document).ready(function () {
 
 
 
+
 })
 
 function closeModal() {
     $('.addDoctorModal').modal('hide').removeAttr('aria-hidden');
     $('.editDoctorModal').modal('hide').removeAttr('aria-hidden');
-    $('.viewDoctorModal').modal('hide');
+    $('.viewDoctorModal').modal('hide').removeAttr('aria-hidden');
 }
 
 function viewDoctor( firstname, lastname, specialty, qualification) {
@@ -226,13 +243,14 @@ function viewDoctor( firstname, lastname, specialty, qualification) {
     }
 
     // Populate modal fields
+    $('#viewDoctorImage').val(doctor_image);
     $('#viewFirstname').val(firstname);
     $('#viewLastname').val(lastname);
     $('#viewSpecialty').val(specialty);
     $('#viewQualification').val(qualification);
 
     // Show the modal
-    $('.viewDoctorModal').modal('show');
+    $('.viewDoctorModal').modal('show').removeAttr('aria-hidden');
 }
 
 

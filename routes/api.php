@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Admin\DoctorController;
-use App\Http\Controllers\Admin\TableController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +30,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'],function(){
     Route::post('/update-doctor/{id}',[DoctorController::class,'updateDoctor']);
     Route::get('/get-doctor/{id}', [DoctorController::class, 'getDoctorById']);
     Route::get('/display/users',[UsersController::class,'getUsers']);
+    Route::post('/register-users',[UsersController::class,'createUsers']);
 
 });

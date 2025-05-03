@@ -17,14 +17,14 @@
                     </div>
                     <div>
                         <button type="button" class="btn btn-success btnAddDoctor" data-mdb-ripple-init>
-                            <i class="fas fa-user-md" style="margin-right: 5px"></i> Add Doctor
+                            <i class="fas fa-user-md fa-lg" style="margin-right: 5px"></i> Add Doctor
                         </button>
                     </div>
 
 
                     <div class="card-body px-3 pt-3 pb-3"> <!-- Adjusted padding -->
                         <div class="table-responsive p-3"> <!-- Padding for the table container -->
-                            <table class="table doctorsTable table-bordered" style="padding: 10px;"> <!-- Added padding and borders -->
+                            <table class="table doctorsTable align-middle table-striped text-center table-bordered" style="padding: 10px;"> <!-- Added padding and borders -->
                                 <thead class="align-middle">
                                     <tr>
                                         <th scope="col" class="text-uppercase text-secondary text-xs font-weight-bold text-center">

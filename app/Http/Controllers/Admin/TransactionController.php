@@ -13,7 +13,7 @@ class TransactionController extends Controller
     public function viewAppointments()
     {
        $users = Users::with('appointments.appointment_status')->get();
-      // dd($users);
+       //dd($users);
       //return view('admin.pages.user-appointments', compact('users'));
       return response()->json(["success" => true, 'users' => $users], 200);
     }
