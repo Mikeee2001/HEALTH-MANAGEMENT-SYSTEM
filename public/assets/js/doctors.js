@@ -47,8 +47,8 @@ $(document).ready(function () {
 
                     doctors.forEach(function (item, index) {
                         table.row.add([
-                            `<div>${index + 1}</div>`,
-                            `<div><img src="/storage/${item.doctor_image}" class="img-fluid img-thumbnail doctor-img text-center" alt="Doctor Image" style="width: 80px; height: 80px;"></div>`,
+                            `<div class="align-middle text-center">${index + 1}</div>`,
+                            `<div><img src="/storage/${item.doctor_image}" class="img-fluid img-thumbnail doctor-img text-center" alt="Doctor Image" style="width: 100px; height: 100px;"></div>`,
                             `<div>${item.firstname}</div>`,
                             `<div>${item.lastname}</div>`,
                             `<div>${item.specialty}</div>`,
@@ -149,7 +149,7 @@ $(document).ready(function () {
                     }
 
                     // Show modal
-                    $('.editDoctorModal').modal('show');
+                    $('.editDoctorModal').modal('show').removeAttr('aria-hidden');
 
                     $('#updateButton').off('click').on('click', function () {
                         var formData = new FormData();
@@ -190,6 +190,8 @@ $(document).ready(function () {
             });
     });
 
+
+    
     $(document).on('click', '.deleteButton', function () {
         var doctorId = $(this).data('id'); // Get doctor ID from the clicked button
 

@@ -70,6 +70,54 @@ class UsersController extends Controller
     }
 
 
+        public function getUsersById($id) {
+            $users = Users::find($id);
 
+            if (!$users) {
+                return response()->json(["success" => false, "message" => "User not found"], 404);
+            }
+
+            return response()->json(["success" => true, "user" => $users], 200);
+        }
+
+        public function updateUser(Request $request, $id)
+        {
+        $user = Users::find($id);
+
+            //  Validate only provided fields, allow partial updates
+            $request->validate([
+                'username' => 'sometimes|string|max:255',
+                'firstname' => 'sometimes|string|max:255',
+                'lastname' => 'sometimes|string|max:255',
+                'email' => 'sometimes|email|unique:users,email,' . $id,
+                'password' => 'nullable|min:8',
+            ]);
+
+            //  Update only the fields present in the request
+            $user->fill($request->only(['username', 'firstname', 'lastname', 'email']));
+
+            //  Secure password update if provided
+            if ($request->filled('password')) {
+                $user->password = Hash::make($request->password);
+            }
+
+            $user->save();
+
+            return response()->json(["success" => true, "message" => "User updated successfully", "user" => $user], 200);
+        }
+
+
+        public function deleteUser($id)
+        {
+            $user = Users::find($id);
+
+            if (!$user) {
+                return response()->json(["success" => false, "message" => "User not found"], 404);
+            }
+
+            $user->delete();
+
+            return response()->json(["success" => true, "message" => "User deleted successfully"], 200);
+        }
 
 }

@@ -24,12 +24,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'api', 'prefix' => 'auth'],function(){
     Route::get('/display/appointment',[TransactionController::class,'displayAppointmentDataUsingJS']);
     Route::get('/display/doctors',[TransactionController::class,'displayDoctorsDataUsingJS']);
+
+    //DOCTORS ROUTES
     Route::post('/add-doctor', [DoctorController::class,'addDoctor']);
     Route::delete('/delete-doctor/{id}', [DoctorController::class, 'deleteDoctor']);
     Route::get('/display/doctors',[TransactionController::class,'displayDoctorsDataUsingJS']);
     Route::post('/update-doctor/{id}',[DoctorController::class,'updateDoctor']);
     Route::get('/get-doctor/{id}', [DoctorController::class, 'getDoctorById']);
+
+    //USERS ROUTES
     Route::get('/display/users',[UsersController::class,'getUsers']);
     Route::post('/register-users',[UsersController::class,'createUsers']);
+    Route::get('/get-user/{id}', [UsersController::class, 'getUsersById']);
+    Route::put('/update-user/{id}',[UsersController::class,'updateUser']);
+    Route::delete('/delete-user/{id}',[UsersController::class,'deleteUser']);
+
 
 });

@@ -17,7 +17,7 @@
                     </div>
                     <div>
                         <button type="button" class="btn btn-success btnAddDoctor" data-mdb-ripple-init>
-                            <i class="fas fa-user-md fa-lg" style="margin-right: 5px"></i> Add Doctor
+                            <i class="fas fa-user-md fa-xl" style="margin-right: 5px"></i> Add Doctor
                         </button>
                     </div>
 

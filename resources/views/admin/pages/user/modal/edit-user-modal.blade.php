@@ -14,27 +14,27 @@
 
                 <div class="modal-body">
                     <div class="form-outline mb-3">
-                        <input type="text" id="editUsername" class="form-control" />
+                        <input type="text" id="updateUsername" class="form-control" />
                         <label class="form-label" for="username">Update Username</label>
                     </div>
                     <div class="form-outline mb-3">
-                        <input type="text" id="editUserFirstname" class="form-control" />
+                        <input type="text" id="updateUserFirstname" class="form-control" />
                         <label class="form-label" for="firstname">Update User FirstName</label>
                     </div>
 
                     <div class="form-outline mb-3">
-                        <input type="text" id="editUserLastname" class="form-control" />
+                        <input type="text" id="updateUserLastname" class="form-control" />
                         <label class="form-label" for="lastname">Update User Lastname</label>
                     </div>
 
                     <div class="form-outline mb-3">
-                        <input type="text" id="editUserEmail" class="form-control" />
+                        <input type="text" id="updateUserEmail" class="form-control" />
                         <label class="form-label" for="email">Update User Email</label>
                     </div>
 
                     <div class="form-outline mb-3">
-                        <input type="text" id="editUserPassword" class="form-control" />
-                        <label class="form-label" for="">Update User Password</label>
+                        <input type="text" id="updateUserPassword" class="form-control" />
+                        <label class="form-label" for="updateUserpassword">Update User Password (Optional)</label>
                     </div>
                 </div>
 
