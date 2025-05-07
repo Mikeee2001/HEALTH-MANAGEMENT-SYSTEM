@@ -22,27 +22,27 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        DB::table('doctors')->insert([
-            [
-                'firstname' => 'Michael',
-                'lastname' => 'Macas',
-                'specialty' => 'Cardiology',
-                'qualification' => 'MD',
+        // DB::table('doctors')->insert([
+        //     [
+        //         'firstname' => 'Michael',
+        //         'lastname' => 'Macas',
+        //         'specialty' => 'Cardiology',
+        //         'qualification' => 'MD',
 
-            ],
-            [
-                'firstname' => 'Dongdong',
-                'lastname' => 'Macas',
-                'specialty' => 'Pediatrics',
-                'qualification' => 'PhD in Medicine or Medical Science',
-            ],
-            [
-                'firstname' => 'Mike',
-                'lastname' => 'Lafuente',
-                'specialty' => 'Pediatrics',
-                'qualification' => 'PhD in Medicine or Medical Science',
-            ],
-            ]);
+        //     ],
+        //     [
+        //         'firstname' => 'Dongdong',
+        //         'lastname' => 'Macas',
+        //         'specialty' => 'Pediatrics',
+        //         'qualification' => 'PhD in Medicine or Medical Science',
+        //     ],
+        //     [
+        //         'firstname' => 'Mike',
+        //         'lastname' => 'Lafuente',
+        //         'specialty' => 'Pediatrics',
+        //         'qualification' => 'PhD in Medicine or Medical Science',
+        //     ],
+        //     ]);
 
 
     }

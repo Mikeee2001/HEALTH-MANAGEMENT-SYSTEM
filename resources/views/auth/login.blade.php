@@ -1,6 +1,8 @@
 @extends('admin.layouts.app')
 
 @section('content')
+
+
     <div class="container position-sticky z-index-sticky top-0">
         <div class="row">
             <div class="col-12">
@@ -21,8 +23,7 @@
                                 </div>
                                 <div class="card-body">
                                     <form role="form" method="POST" action="{{ route('login.perform') }}">
-                                        @csrf
-                                        @method('post')
+                                       @csrf
                                         <div class="flex flex-col mb-3">
                                             <input type="email" name="email" class="form-control form-control-lg" value="{{ old('email') ?? 'example@gmail.com' }}" aria-label="Email">
                                             @error('email')

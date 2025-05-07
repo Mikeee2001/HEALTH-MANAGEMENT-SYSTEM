@@ -18,9 +18,9 @@ class AppointmentStatuses extends Model
         'appointment_status_id',
     ];
 
-    public function Appointment()
+    public function appointments()
     {
-        return $this->hasMany(Appointments::class, 'appointment_status_id', 'id');
+        return $this->hasMany(Appointments::class,  'appointment_status_id');
     }
 
     public function User()

@@ -55,7 +55,7 @@ class Users extends Authenticatable
         return $this->belongsTo(Admin::class,'id');
     }
 
-    public function Appointments()
+    public function appointments()
     {
         return $this->hasMany(Appointments::class,'user_id','id');
     }
@@ -69,5 +69,6 @@ class Users extends Authenticatable
     // {
     //     return $this->hasMany(Patients::class,'id');
     // }
+
 
 }

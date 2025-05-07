@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Admin;
+use App\Models\Users;
 use App\Models\Appointments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,11 +27,9 @@ class Doctors extends Model
         return $this->belongsTo(Admin::class,'id');
     }
 
-    public function Appointments()
+    public function appointments()
     {
-        return $this->hasMany(Appointments::class,'id');
+        return $this->hasMany(Appointments::class,'doctor_id','id');
     }
-
-
 
 }

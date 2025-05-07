@@ -15,7 +15,7 @@
                 <a class="nav-link d-flex align-items-center" href="{{ route('home') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center me-2">
-                        <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+                        <i class="ni ni-tv-2 text-primary fs-3 opacity-10"></i>
                     </div>
                     <span class="nav-link-text">Dashboard</span>
                 </a>
@@ -30,7 +30,7 @@
                 <a class="nav-link d-flex align-items-center" href="{{ route('get-users') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center me-2">
-                        <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+                        <i class="ni ni-tv-2 text-primary fs-3 opacity-10"></i>
                     </div>
                     <span class="nav-link-text">Users</span>
                 </a>
@@ -38,12 +38,12 @@
 
             <!-- User Appointments -->
             <li class="nav-item">
-                <a class="nav-link d-flex align-items-center" href="{{ route('user-appointments') }}">
+                <a class="nav-link d-flex align-items-center" href="{{ route('users-appointments') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center me-2">
-                        <i class="ni ni-collection text-info text-sm opacity-10"></i>
+                        <i class="ni ni-collection text-info fs-3 opacity-10"></i>
                     </div>
-                    <span class="nav-link-text">User appointments</span>
+                    <span class="nav-link-text">User with appointments</span>
                 </a>
             </li>
 
@@ -52,7 +52,7 @@
                 <a class="nav-link d-flex align-items-center" href="{{ route('doctors') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center d-flex align-items-center justify-content-center me-2">
-                        <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
+                        <i class="ni ni-tv-2 text-primary fs-3 opacity-10"></i>
                     </div>
                     <span class="nav-link-text">Doctors</span>
                 </a>

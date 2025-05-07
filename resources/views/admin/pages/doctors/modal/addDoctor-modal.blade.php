@@ -1,5 +1,5 @@
 <!-- Doctor Modal -->
-<div class="modal fade addDoctorModal" tabindex="-1">
+<div class="modal fade" id="addDoctorModal" tabindex="-1">
 
 {{-- <div class="modal doctorModal" tabindex="-1" role="dialog"> --}}
     <div class="modal-dialog" role="document">
@@ -19,22 +19,22 @@
             <div class="modal-body">
                 <div class="form-outline mb-3">
                     <input type="text" id="firstname" class="form-control" />
-                    <label class="form-label" for="firstname">First Name</label>
+                    <label class="form-label" for="firstname">Enter Doctor Firstname</label>
                 </div>
 
                 <div class="form-outline mb-3">
                     <input type="text" id="lastname" class="form-control" />
-                    <label class="form-label" for="lastname">Last Name</label>
+                    <label class="form-label" for="lastname">Enter Doctor Lastname</label>
                 </div>
 
                 <div class="form-outline mb-3">
                     <input type="text" id="specialty" class="form-control" />
-                    <label class="form-label" for="specialty">Specialty</label>
+                    <label class="form-label" for="specialty">Enter Doctor Specialty</label>
                 </div>
 
                 <div class="form-outline mb-3">
                     <input type="text" id="qualification" class="form-control" />
-                    <label class="form-label" for="qualification">Qualification</label>
+                    <label class="form-label" for="qualification">Enter Doctor Qualification</label>
                 </div>
             </div>
 

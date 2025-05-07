@@ -6,10 +6,11 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\Admin\TableController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\TransactionController;
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
+use App\Http\Controllers\Admin\AppointmentWithUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ use App\Http\Controllers\Admin\TransactionController;
 //     return view('welcome');
 // })->name('home');
 Route::get('/', function () {
-    return view('auth.login');
+    return view('admin.pages.dashboard');
 })->name('home');
 
 Route::get('/appointments', [TransactionController::class, 'viewAppointments'])->name('profile');
@@ -42,6 +43,7 @@ Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('gues
 Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
 Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 
+Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
 //ADMIN
  //Route::middleware(['auth:web'])->prefix('admin')->group(function () {
@@ -51,6 +53,8 @@ Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('
    // Route::get('/get-users',[UsersController::class,'getUsers']);
 
 Route::get('/get-users',[UsersController::class,'displayUsersData'])->name('get-users');
+Route::get('/user-appointments', [AppointmentWithUserController::class, 'viewUsersAppointments'])->name('users-appointments');
+
 
  Route::group([], function () {
     Route::get('/{page}', [PageController::class, 'showPage'])->name('page');
@@ -59,7 +63,6 @@ Route::get('/get-users',[UsersController::class,'displayUsersData'])->name('get-
     Route::get('/get-user2', [PageController::class, 'getUser2']);
     Route::get('/get-user3', [PageController::class, 'getUser3']);
     Route::get('/dashboard', [PageController::class, 'Dashboard'])->name('dashboard');
-    Route::get('/user-appointments', [TransactionController::class, 'viewAppointments'])->name('user-appointments');
     Route::get('/doctors', [DoctorController::class, 'viewDoctors'])->name('doctors');
     // Route::get('/doctors', [DoctorController::class, 'displayDoctorsDataUsingJS']);
     // Route::post('/doctors/upload-image', [DoctorController::class, 'uploadImage'])->name('doctors.upload-image');

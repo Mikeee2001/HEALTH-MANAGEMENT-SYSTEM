@@ -36,7 +36,7 @@ $(document).ready(function () {
         axios.get('/api/auth/display/doctors')
             .then(function (response) {
                 var doctors = response.data.doctors;
-                const table = $('.doctorsTable').DataTable()
+                // const table = $('.doctorsTable').DataTable()
 
                 if (response.data.success) {
                     console.log(doctors);
@@ -53,7 +53,7 @@ $(document).ready(function () {
                             `<div>${item.lastname}</div>`,
                             `<div>${item.specialty}</div>`,
                             `<div>${item.qualification}</div>`,
-                            `<div class="d-flex justify-content-around custom-buttons">
+                            `<div class="d-flex gap-3 custom-buttons">
                                 <a class="btn btn-info btn-lg"
                                 onclick="viewDoctor('${item.firstname}', '${item.lastname}', '${item.specialty}', '${item.qualification}')"
                                 type="button">
@@ -80,7 +80,7 @@ $(document).ready(function () {
 
 
     $('.btnAddDoctor').on('click', function () {
-        $('.addDoctorModal').modal('show').removeAttr('aria-hidden');
+        $('#addDoctorModal').modal('show').removeAttr('aria-hidden');
     });
 
 
@@ -109,7 +109,9 @@ $(document).ready(function () {
             headers: { 'Content-Type': 'multipart/form-data' }
         }).then((response) => {
             console.log("Doctor saved successfully:", response);
-            closeModal(); //CLOSE THE MODAL
+
+            $('#addDoctorModal').modal('hide'); //CLOSE THE MODAL
+
             displayDoctors(); // ✅ REFRESH THE TABLE
             toastr.success("Doctor added successfully!");
 
@@ -171,11 +173,15 @@ $(document).ready(function () {
                             },
                         })
                             .then(() => {
-                                console.log("Update success! Refreshing table...");
+                                // console.log("Update success! Refreshing table...");
+
                                 $('.editDoctorModal').modal('hide');
+
                                 displayDoctors(); // Refresh doctor list
                                 toastr.success("Doctor updated successfully!");
+
                             })
+
                             .catch(() => {
                                 toastr.error("Failed to update the doctor. Please try again.");
                             });
@@ -191,7 +197,7 @@ $(document).ready(function () {
     });
 
 
-    
+
     $(document).on('click', '.deleteButton', function () {
         var doctorId = $(this).data('id'); // Get doctor ID from the clicked button
 
@@ -220,7 +226,7 @@ $(document).ready(function () {
 })
 
 function closeModal() {
-    $('.addDoctorModal').modal('hide').removeAttr('aria-hidden');
+    $('#addDoctorModal').modal('hide').removeAttr('aria-hidden');
     $('.editDoctorModal').modal('hide').removeAttr('aria-hidden');
     $('.viewDoctorModal').modal('hide').removeAttr('aria-hidden');
 }

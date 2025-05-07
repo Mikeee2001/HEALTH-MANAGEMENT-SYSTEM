@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -27,91 +28,43 @@ return new class extends Migration
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('cascade')->onUpdate('cascade');
         });
 
-        DB::table('appointments')->insert([
-            [
-                'appointment_name' => 'Consult with Dr. Michael Macas',
-                'date_time' => '2025-03-31 10:00:00',
-                'appointment_type' => 'consult',
-                'user_id' => 1,
-                'appointment_status_id' => 1,
-                'doctor_id' => 1,
-            ],
-            [
-                'appointment_name' => 'Checkup with Dr. Dongdong Macas',
-                'date_time' => '2025-04-01 09:00:00',
-                'appointment_type' => 'checkup',
-                'user_id' => 2,
-                'appointment_status_id' => 2,
-                'doctor_id' => 2,
-            ],
-            [
-                'appointment_name' => 'Emergency with Dr. Mike Lafuente',
-                'date_time' => '2025-04-02 15:30:00',
-                'appointment_type' => 'emergency',
-                'user_id' => 3,
-                'appointment_status_id' => 1,
-                'doctor_id' => 3,
-            ],
-            [
-                'appointment_name' => 'Follow-up with Dr. Michael Macas',
-                'date_time' => '2025-04-03 11:15:00',
-                'appointment_type' => 'follow-up',
-                'user_id' => 4,
-                'appointment_status_id' => 1,
-                'doctor_id' => 1,
-            ],
-            [
-                'appointment_name' => 'Consult with Dr. Dongdong Macas',
-                'date_time' => '2025-04-04 14:00:00',
-                'appointment_type' => 'consult',
-                'user_id' => 5,
-                'appointment_status_id' => 1,
-                'doctor_id' => 2,
-            ],
-            [
-                'appointment_name' => 'Checkup with Dr. Mike Lafuente',
-                'date_time' => '2025-04-05 08:00:00',
-                'appointment_type' => 'checkup',
-                'user_id' => 6,
-                'appointment_status_id' => 2,
-                'doctor_id' => 3,
-            ],
-            [
-                'appointment_name' => 'Emergency with Dr. Michael Macas',
-                'date_time' => '2025-04-06 22:00:00',
-                'appointment_type' => 'emergency',
-                'user_id' => 7,
-                'appointment_status_id' => 2,
-                'doctor_id' => 1,
-            ],
-            [
-                'appointment_name' => 'Follow-up with Dr. Dongdong Macas',
-                'date_time' => '2025-04-07 13:00:00',
-                'appointment_type' => 'follow-up',
-                'user_id' => 8,
-                'appointment_status_id' => 1,
-                'doctor_id' => 2,
-            ],
-            [
-                'appointment_name' => 'Consult with Dr. Mike Lafuente',
-                'date_time' => '2025-04-08 17:30:00',
-                'appointment_type' => 'consult',
-                'user_id' => 9,
-                'appointment_status_id' => 1,
-                'doctor_id' => 3,
-            ],
-            [
-                'appointment_name' => 'Checkup with Dr. Michael Macas',
-                'date_time' => '2025-04-09 09:45:00',
-                'appointment_type' => 'checkup',
-                'user_id' => 10,
-                'appointment_status_id' => 2,
-                'doctor_id' => 1,
-            ],
+        // DB::table('appointments')->insert([
+        //     [
+        //         'appointment_name' => 'Consult with Dr. Michael Macas',
+        //         'date_time' => '2025-03-31 10:00:00',
+        //         'appointment_type' => 'consult',
+        //         'user_id' => 1,
+        //         'appointment_status_id' => 1,
+        //         'doctor_id' => 1,
+        //     ],
+        //     [
+        //         'appointment_name' => 'Checkup with Dr. Dongdong Macas',
+        //         'date_time' => '2025-04-01 09:00:00',
+        //         'appointment_type' => 'checkup',
+        //         'user_id' => 2,
+        //         'appointment_status_id' => 2,
+        //         'doctor_id' => 2,
+        //     ],
 
-            
-        ]);
+        //     [
+        //         'appointment_name' => 'Follow-up with Dr. Michael Macas',
+        //         'date_time' => '2025-04-03 11:15:00',
+        //         'appointment_type' => 'follow-up',
+        //         'user_id' => 4,
+        //         'appointment_status_id' => 1,
+        //         'doctor_id' => 1,
+        //     ],
+        //     [
+        //         'appointment_name' => 'Consult with Dr. Dongdong Macas',
+        //         'date_time' => '2025-04-04 14:00:00',
+        //         'appointment_type' => 'consult',
+        //         'user_id' => 5,
+        //         'appointment_status_id' => 1,
+        //         'doctor_id' => 2,
+        //     ],
 
+
+        // ]);
     }
 
     /**

@@ -34,30 +34,30 @@ return new class extends Migration
 
 
         });
-        DB::table('patients')->insert([
-            [
-                'fullname' => 'John Doe',
-                'gender' => 'Male',
-                'DOB' => '1990-05-15',
-                'phone' => '09171234567',
-                'medical_history' => 'History of hypertension, allergic to penicillin',
-                'userID' => 1,
-                'doctor_ID' => 1,
-                'appointments_id' => 1,
-                'billing_id' => 1,
-            ],
-            [
-                'fullname' => 'May Doe',
-                'gender' => 'Male',
-                'DOB' => '1990-05-15',
-                'phone' => '09171234567',
-                'medical_history' => 'History of hypertension, allergic to penicillin',
-                'userID' => 2,
-                'doctor_ID' => 1,
-                'appointments_id' => 1,
-                'billing_id' => 2,
-            ]
-        ]);
+        // DB::table('patients')->insert([
+        //     [
+        //         'fullname' => 'John Doe',
+        //         'gender' => 'Male',
+        //         'DOB' => '1990-05-15',
+        //         'phone' => '09171234567',
+        //         'medical_history' => 'History of hypertension, allergic to penicillin',
+        //         'userID' => 1,
+        //         'doctor_ID' => 1,
+        //         'appointments_id' => 1,
+        //         'billing_id' => 1,
+        //     ],
+        //     [
+        //         'fullname' => 'May Doe',
+        //         'gender' => 'Male',
+        //         'DOB' => '1990-05-15',
+        //         'phone' => '09171234567',
+        //         'medical_history' => 'History of hypertension, allergic to penicillin',
+        //         'userID' => 2,
+        //         'doctor_ID' => 1,
+        //         'appointments_id' => 1,
+        //         'billing_id' => 2,
+        //     ]
+        // ]);
     }
 
     /**

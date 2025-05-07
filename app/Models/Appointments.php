@@ -8,6 +8,7 @@ use App\Models\Users;
 use App\Models\Doctors;
 use App\Models\AppointmentStatuses;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Appointments extends Model
@@ -22,6 +23,11 @@ class Appointments extends Model
         'appointment_type',
         'user_id',
         'appointment_status_id',
+        'doctor_id',
+    ];
+
+    protected $casts = [
+        'date_time' => 'datetime', // Ensures it is a Carbon instance
     ];
 
     public function Admin()
@@ -29,9 +35,9 @@ class Appointments extends Model
         return $this->belongsTo(Admin::class,'id');
     }
 
-    public function Appointment_status()
+    public function appointmentStatus()
     {
-        return $this->belongsTo(AppointmentStatuses::class,'appointment_status_id', 'id');
+        return $this->belongsTo(AppointmentStatuses::class, 'appointment_status_id');
     }
 
     public function Users()
@@ -39,9 +45,9 @@ class Appointments extends Model
         return $this->belongsTo(Users::class,'user_id','id');
     }
 
-    public function Doctors()
+    public function doctor()
     {
-        return $this->belongsTo(Doctors::class,'id');
+        return $this->belongsTo(Doctors::class,'doctor_id');
     }
 
 }

@@ -72,6 +72,7 @@
 
             displayUsers();
 
+            //SAVE USER BUTTON
             $('.btnAddUser').on('click', function () {
                 $('.addUserModal').modal('show').removeAttr('aria-hidden');
 
