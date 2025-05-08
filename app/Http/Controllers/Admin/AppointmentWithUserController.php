@@ -89,6 +89,24 @@ class AppointmentWithUserController extends Controller
         }
     }
 
+    public function getUserAppointments()
+    {
+        $user = auth()->user(); // Get the authenticated user via token
+
+        if (!$user) {
+            return response()->json(["success" => false, "message" => "Unauthorized"], 401);
+        }
+
+        // ✅ Fetch only appointments belonging to this user
+        $appointments = $user->appointments()->with(['doctor', 'appointmentStatus'])->latest()->get();
+
+        if ($appointments->isEmpty()) {
+            return response()->json(["success" => true, "message" => "No appointments found", "appointments" => []], 200);
+        }
+
+        return response()->json(["success" => true, "appointments" => $appointments], 200);
+    }
+
 
 
 

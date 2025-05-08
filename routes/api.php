@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\SearchController;
 use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
 use App\Http\Controllers\Admin\AppointmentWithUserController;
 
@@ -37,7 +38,6 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'],function(){
     Route::post('/login', [UserLoginController::class, 'login']);
 
 
-
     //DOCTORS ROUTES
     Route::post('/add-doctor', [DoctorController::class,'addDoctor']);
     Route::delete('/delete-doctor/{id}', [DoctorController::class, 'deleteDoctor']);
@@ -50,8 +50,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'],function(){
     Route::post('/register-users',[UsersController::class,'createUsers']);
     Route::get('/get-user/{id}', [UsersController::class, 'getUsersById']);
     Route::put('/update-user/{id}',[UsersController::class,'updateUser']);
-    Route::delete('/delete-user/:id',[UsersController::class,'deleteUser']);
-
+    Route::delete('/delete-user/{id}',[UsersController::class,'deleteUser']);
 
 
     //USERS WITH APPOINTMENTS
@@ -59,5 +58,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'],function(){
     Route::get('/get-available-doctors', [AppointmentWithUserController::class, 'getAvailableDoctors']);
     Route::post('/store-appointment', [AppointmentWithUserController::class, 'storeAppointment']);
     Route::get('/fetch-users',[UsersController::class,'getUsers']);
+    Route::middleware('auth:sanctum')->get('/user-appointments', [AppointmentWithUserController::class, 'getUserAppointments']);
+
+    //SEARCH ROUTE
+    Route::get('/search-doctors', [SearchController::class, 'searchDoctors']);
 
 });
