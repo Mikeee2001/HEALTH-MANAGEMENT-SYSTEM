@@ -32,10 +32,10 @@
                         <label class="form-label" for="email">Update User Email</label>
                     </div>
 
-                    <div class="form-outline mb-3">
+                    {{-- <div class="form-outline mb-3">
                         <input type="text" id="updateUserPassword" class="form-control" />
                         <label class="form-label" for="updateUserpassword">Update User Password (Optional)</label>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="modal-footer">

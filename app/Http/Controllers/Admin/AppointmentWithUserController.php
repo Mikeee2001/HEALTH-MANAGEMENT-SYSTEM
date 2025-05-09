@@ -107,6 +107,19 @@ class AppointmentWithUserController extends Controller
         return response()->json(["success" => true, "appointments" => $appointments], 200);
     }
 
+    public function deleteAppointment($id)
+    {
+        error_log("Deleting appointment with ID: " . $id);
+
+        $appointment = Appointments::find($id);
+
+        if (!$appointment) {
+            return response()->json(["success" => false, "message" => "Appointment not found"], 404);
+        }
+
+        $appointment->delete();
+        return response()->json(["success" => true, "message" => "Appointment deleted successfully"], 200);
+    }
 
 
 

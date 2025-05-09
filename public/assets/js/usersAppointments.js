@@ -45,8 +45,11 @@ $(document).ready(function () {
                                 <a class="btn btn-info btn-lg" onclick="viewUserAppointments()" type="button">
                                     <i class="fas fa-eye custom-icon"></i>
                                 </a>
-                                <a class="btn btn-warning btn-lg mx-1" type="button"><i class="fas fa-edit custom-icon"></i></a>
-                                <a class="btn btn-danger btn-lg" type="button"><i class="fas fa-trash custom-icon"></i></a>
+                                <a class="btn btn-warning btn-lg mx-1 " type="button"><i class="fas fa-edit custom-icon"></i></a>
+                                <a class="btn btn-danger btn-lg deleteAppointmentBtn" data-id="${appointment.id}" type="button">
+                                        <i class="fas fa-trash custom-icon"></i>
+                                </a>
+
                             </div>`
                             ]);
                         });
@@ -60,11 +63,7 @@ $(document).ready(function () {
 
     displayUserAppointment();
 
-    // ✅ Fetch users dynamically before opening modal
-    $('#addAppointment').on('click', function () {
-        fetchUsers(); // Load users before showing modal
-        $('.makeNewAppointment').modal('show').removeAttr('aria-hidden');
-    });
+
 
     // ✅ Fetch available doctors on appointment date selection
     $("#appointmentDate").on("change", function () {
@@ -105,66 +104,101 @@ $(document).ready(function () {
 
     setDateLimits();
 
+     // ✅ Fetch users dynamically before opening modal
+    // $('#addAppointment').on('click', function () {
+    //     fetchUsers(); // Load users before showing modal
+    //     $('.makeNewAppointment').modal('show').removeAttr('aria-hidden');
+    // });
+
     // ✅ Function to fetch users dynamically
 
 
     // ✅ Save appointment with selected user
-    $('#saveAppointment').on('click', function () {
-        var addUserSelect = $('#userSelect').val();
-        var addAppointmentDate = $('#appointmentDate').val();
-        var addAppointmentType = $('#appointmentType').val();
-        var addDoctorSelect = $('#doctorSelect').val();
-        var addStatusSelect = $('#statusSelect').val();
+    // $('#saveAppointment').on('click', function () {
+    //     var addUserSelect = $('#userSelect').val();
+    //     var addAppointmentDate = $('#appointmentDate').val();
+    //     var addAppointmentType = $('#appointmentType').val();
+    //     var addDoctorSelect = $('#doctorSelect').val();
+    //     var addStatusSelect = $('#statusSelect').val();
 
-        const allowedAppointmentTypes = ["checkup", "emergency", "follow-up", "consult"];
+    //     const allowedAppointmentTypes = ["checkup", "emergency", "follow-up", "consult"];
 
-        console.log("Debugging Values:");
-        console.log("Selected User ID:", addUserSelect);
-        console.log("Appointment Date:", addAppointmentDate);
-        console.log("Appointment Type:", addAppointmentType);
-        console.log("Doctor:", addDoctorSelect);
-        console.log("Status:", addStatusSelect);
+    //     console.log("Debugging Values:");
+    //     console.log("Selected User ID:", addUserSelect);
+    //     console.log("Appointment Date:", addAppointmentDate);
+    //     console.log("Appointment Type:", addAppointmentType);
+    //     console.log("Doctor:", addDoctorSelect);
+    //     console.log("Status:", addStatusSelect);
 
-        if (!addUserSelect || !addAppointmentDate || !addAppointmentType || !addDoctorSelect || !addStatusSelect) {
-            toastr.error("Please fill in all the fields before submitting.");
+    //     if (!addUserSelect || !addAppointmentDate || !addAppointmentType || !addDoctorSelect || !addStatusSelect) {
+    //         toastr.error("Please fill in all the fields before submitting.");
+    //         return;
+    //     }
+
+    //     if (!allowedAppointmentTypes.includes(addAppointmentType)) {
+    //         toastr.error("Invalid appointment type! Please select a valid option.");
+    //         return;
+
+    //     }
+
+
+    //     // ✅ Prepare the Data
+    //     let appointmentData = {
+    //         appointment_name: `Appointment for ${addUserSelect}`,
+    //         appointment_date: addAppointmentDate,
+    //         allowedAppointmentTypes: ["checkup", "emergency", "follow-up", "consult"],
+    //         doctor_id: addDoctorSelect,
+    //         status: addStatusSelect,
+    //         user_id: addUserSelect // ✅ Correct user selection
+    //     };
+
+    //     console.log("Appointment Data being sent:", appointmentData);
+
+    //     // ✅ Send the Request
+    //     axios.post('/api/auth/store-appointment', appointmentData, {
+
+    //     })
+    //     .then(response => {
+    //         console.log("Appointment Created Successfully:", response.data);
+    //         toastr.success("Appointment booked successfully!");
+    //         displayUserAppointment();
+    //         closeModal();
+    //     })
+    //     .catch(error => {
+    //         console.error("Error creating appointment:", error.response.data);
+    //         toastr.error("Failed to book appointment. Please try again.");
+    //     });
+
+
+    // });
+
+    $(document).on("click", ".deleteAppointmentBtn", function () {
+        var appointmentID = $(this).data("id"); // ✅ Get appointment ID
+
+        console.log("Appointment ID to delete:", appointmentID); // ✅ Debugging step
+
+        if (!appointmentID) {
+            toastr.error("Invalid appointment ID.");
             return;
         }
 
-        if (!allowedAppointmentTypes.includes(addAppointmentType)) {
-            toastr.error("Invalid appointment type! Please select a valid option.");
-            return;
+        if (confirm("Are you sure you want to delete this Appointment?")) {
+            axios.delete(`/api/auth/delete-appointment/${appointmentID}`)
+                .then(function (response) {
+                    if (response.data.success) {
 
+                        toastr.success("Appointment deleted successfully!");
+                         displayUserAppointment();
+                         table.draw(false); 
+                    } else {
+                        toastr.error(response.data.message || "Failed to delete Appointment.");
+                    }
+                })
+                .catch(function (error) {
+                    console.error("Error deleting Appointment:", error.message);
+                    toastr.error("Failed to delete Appointment. Please try again.");
+                });
         }
-
-
-        // ✅ Prepare the Data
-        let appointmentData = {
-            appointment_name: `Appointment for ${addUserSelect}`,
-            appointment_date: addAppointmentDate,
-            allowedAppointmentTypes: ["checkup", "emergency", "follow-up", "consult"],
-            doctor_id: addDoctorSelect,
-            status: addStatusSelect,
-            user_id: addUserSelect // ✅ Correct user selection
-        };
-
-        console.log("Appointment Data being sent:", appointmentData);
-
-        // ✅ Send the Request
-        axios.post('/api/auth/store-appointment', appointmentData, {
-
-        })
-        .then(response => {
-            console.log("Appointment Created Successfully:", response.data);
-            toastr.success("Appointment booked successfully!");
-            displayUserAppointment();
-            closeModal();
-        })
-        .catch(error => {
-            console.error("Error creating appointment:", error.response.data);
-            toastr.error("Failed to book appointment. Please try again.");
-        });
-
-
     });
 });
 
@@ -194,7 +228,11 @@ function setDateLimits() {
             toastr.error("Invalid time! Please select a time between 8:00 AM and 8:00 PM.");
             $(this).val("");
         }
+
+
     });
+
+
 }
 
 
@@ -224,3 +262,4 @@ function fetchUsers() {
             toastr.error("Failed to retrieve users.");
         });
 }
+

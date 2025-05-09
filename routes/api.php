@@ -59,6 +59,8 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'],function(){
     Route::post('/store-appointment', [AppointmentWithUserController::class, 'storeAppointment']);
     Route::get('/fetch-users',[UsersController::class,'getUsers']);
     Route::middleware('auth:sanctum')->get('/user-appointments', [AppointmentWithUserController::class, 'getUserAppointments']);
+    Route::delete('/delete-appointment/{id}', [AppointmentWithUserController::class, 'deleteAppointment']);
+    Route::put('/edit-appointment/{id}',[AppointmentWithUserController::class,'editAppointment']);
 
     //SEARCH ROUTE
     Route::get('/search-doctors', [SearchController::class, 'searchDoctors']);

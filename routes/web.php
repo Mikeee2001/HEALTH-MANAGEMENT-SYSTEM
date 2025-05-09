@@ -30,7 +30,7 @@ Route::get('/', function () {
     return view('admin.pages.dashboard');
 })->name('home');
 
-Route::get('/appointments', [TransactionController::class, 'viewAppointments'])->name('profile');
+//Route::get('/appointments', [TransactionController::class, 'viewAppointments'])->name('profile');
 
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

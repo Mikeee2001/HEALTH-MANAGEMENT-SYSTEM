@@ -14,11 +14,11 @@
                         <h6 class="text-uppercase font-weight-bold">Appointments List</h6>
                     </div>
 
-                    <div class="mb-2">
+                    {{-- <div class="mb-2">
                         <button type="button" id="addAppointment" class="btn btn-success btn-xl">
                             <i class="fas fa-user fa-lg"></i> Add Appointment
                         </button>
-                    </div>
+                    </div> --}}
 
                     <div class="card-body px-2 pt-2 pb-2">
                         <div class="table-responsive">

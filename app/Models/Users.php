@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Admin;
-use App\Models\Patients;
+use App\Models\Billings;
 use App\Models\Appointments;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\AppointmentStatuses;
@@ -65,10 +65,10 @@ class Users extends Authenticatable
         return $this->belongsTo(AppointmentStatuses::class,'id');
     }
 
-    // public function Patients()
-    // {
-    //     return $this->hasMany(Patients::class,'id');
-    // }
+    public function billings()
+    {
+        return $this->belongsTo(Billings::class,'billings_id');
+    }
 
 
 }

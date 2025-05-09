@@ -52,7 +52,7 @@
                                     <a class="btn btn-info btn-lg"
                                     onclick="viewUsers('${item.username}', '${item.firstname}', '${item.lastname}', '${item.email}','${new Date(item.created_at).toLocaleDateString()}')"
                                     type="button"><i class="fas fa-eye custom-icon"></i></a>
-                                <a class="btn btn-warning btn-lg mx-1 editUserBtn" data-id="${item.id}" type="button"><i class="fa-solid fa-user-pen custom-icon"></i></a>
+                                    <a class="btn btn-warning btn-lg mx-1 editUserBtn" data-id="${item.id}" type="button"><i class="fa-solid fa-user-pen custom-icon"></i></a>
                                     <a class="btn btn-danger btn-lg deleteUserBtn" data-id="${item.id}" type="button"><i class="fas fa-trash custom-icon"></i></a>
                                 </div>`
                             ]);
