@@ -32,8 +32,6 @@ Route::group(['middleware' => ['auth:sanctum'], 'prefix' => 'auth'], function ()
 Route::get('/sanctum/csrf-cookie', [CsrfCookieController::class, 'show']);
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'],function(){
-    // Route::get('/display/appointment',[TransactionController::class,'displayAppointmentDataUsingJS']);
-    // Route::get('/display/doctors',[TransactionController::class,'displayDoctorsDataUsingJS']);
 
     Route::post('/login', [UserLoginController::class, 'login']);
 
@@ -60,7 +58,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'],function(){
     Route::get('/fetch-users',[UsersController::class,'getUsers']);
     Route::middleware('auth:sanctum')->get('/user-appointments', [AppointmentWithUserController::class, 'getUserAppointments']);
     Route::delete('/delete-appointment/{id}', [AppointmentWithUserController::class, 'deleteAppointment']);
-    Route::put('/edit-appointment/{id}',[AppointmentWithUserController::class,'editAppointment']);
+    Route::put('/update-appointment/{id}',[AppointmentWithUserController::class,'updateAppointmentDetails']);
+    Route::get('/get-appointment/{id}',[AppointmentWithUserController::class,' getAppointmentById']);
+
 
     //SEARCH ROUTE
     Route::get('/search-doctors', [SearchController::class, 'searchDoctors']);

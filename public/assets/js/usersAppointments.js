@@ -42,10 +42,8 @@ $(document).ready(function () {
                             `<div class="align-middle text-center">${doctorText}</div>`,
                             `<div class="align-middle text-center">${statusText}</div>`,
                             `<div class="d-flex gap-3 custom-buttons">
-                                <a class="btn btn-info btn-lg" onclick="viewUserAppointments()" type="button">
-                                    <i class="fas fa-eye custom-icon"></i>
-                                </a>
-                                <a class="btn btn-warning btn-lg mx-1 " type="button"><i class="fas fa-edit custom-icon"></i></a>
+
+                                <a class="btn btn-warning btn-lg mx-1" editStatusBtn type="button"><i class="fas fa-edit custom-icon"></i></a>
                                 <a class="btn btn-danger btn-lg deleteAppointmentBtn" data-id="${appointment.id}" type="button">
                                         <i class="fas fa-trash custom-icon"></i>
                                 </a>
@@ -172,6 +170,45 @@ $(document).ready(function () {
 
     // });
 
+//  $(document).on('click', '.editAppointment', function () {
+//     var appointmentID = $(this).data("id");
+
+//     axios.get(`/api/auth/get-appointment/${appointmentID}`)
+//         .then(response => {
+//             if (response.data.success) {
+//                 let appointment = response.data.appointment;
+
+//                 $("#appointmentID").val(appointment.id);
+//                 $("#appointmentStatus").val(appointment.appointmentStatus.status);
+
+//                 $("#editStatusModal").modal("show");
+//             }
+//         })
+//         .catch(error => console.error("Error fetching appointment status:", error.message));
+
+//         $("#saveStatusChanges").click(function () {
+//     var appointmentID = $("#appointmentID").val();
+//     var updatedStatus = $("#appointmentStatus").val();
+
+//     axios.put(`/api/auth/update-appointment-status/${appointmentID}`, { status: updatedStatus })
+//         .then(response => {
+//             if (response.data.success) {
+//                 toastr.success("Appointment status updated successfully!");
+//                 $("#editStatusModal").modal("hide");
+//                 displayUserAppointment(); // Refresh table
+//             } else {
+//                 toastr.error("Failed to update appointment status.");
+//             }
+//         })
+//         .catch(error => {
+//             console.error("Error updating appointment status:", error.message);
+//             toastr.error("Failed to update status. Please try again.");
+//         });
+// });
+
+//  })
+
+
     $(document).on("click", ".deleteAppointmentBtn", function () {
         var appointmentID = $(this).data("id"); // ✅ Get appointment ID
 
@@ -189,7 +226,7 @@ $(document).ready(function () {
 
                         toastr.success("Appointment deleted successfully!");
                          displayUserAppointment();
-                         table.draw(false); 
+                         table.draw(false);
                     } else {
                         toastr.error(response.data.message || "Failed to delete Appointment.");
                     }
@@ -262,4 +299,5 @@ function fetchUsers() {
             toastr.error("Failed to retrieve users.");
         });
 }
+
 

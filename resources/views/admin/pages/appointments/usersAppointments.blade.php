@@ -3,7 +3,8 @@
 @section('content')
 
 @include('admin.layouts.navbars.auth.topnav', ['title' => 'Users with Appointments'])
-@include('admin.pages.appointments.modal.add-appointment-modal')
+{{-- @include('admin.pages.appointments.modal.add-appointment-modal') --}}
+@include('admin.pages.appointments.usersAppointments' )
 
 <section class="p-4">
     <div class="container-fluid py-4">

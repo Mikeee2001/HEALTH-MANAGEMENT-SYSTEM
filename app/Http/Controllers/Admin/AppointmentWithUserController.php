@@ -34,23 +34,23 @@ class AppointmentWithUserController extends Controller
     }
 
 
-    public function getAvailableDoctors(Request $request)
-    {
-        $appointmentDateTime = $request->input('appointment_date');
+    // public function getAvailableDoctors(Request $request)
+    // {
+    //     $appointmentDateTime = $request->input('appointment_date');
 
-        // Get doctors who are already booked at the selected date
-        $bookedDoctorIds = Appointments::where('date_time', $appointmentDateTime)
-            ->pluck('doctor_id')
-            ->toArray();
+    //     // Get doctors who are already booked at the selected date
+    //     $bookedDoctorIds = Appointments::where('date_time', $appointmentDateTime)
+    //         ->pluck('doctor_id')
+    //         ->toArray();
 
-        // Fetch only doctors who are not booked
-        $availableDoctors = Doctors::whereNotIn('id', $bookedDoctorIds)->get();
+    //     // Fetch only doctors who are not booked
+    //     $availableDoctors = Doctors::whereNotIn('id', $bookedDoctorIds)->get();
 
-        return response()->json([
-            'success' => true,
-            'available_doctors' => $availableDoctors
-        ]);
-    }
+    //     return response()->json([
+    //         'success' => true,
+    //         'available_doctors' => $availableDoctors
+    //     ]);
+    // }
 
     public function storeAppointment(Request $request)
     {
@@ -121,6 +121,30 @@ class AppointmentWithUserController extends Controller
         return response()->json(["success" => true, "message" => "Appointment deleted successfully"], 200);
     }
 
+ public function updateAppointmentDetails(Request $request, $id) {
+    $request->validate([
+        'appointment_date' => 'required|date|after_or_equal:today',
+        'appointment_time' => 'required|date_format:H:i',
+        'appointment_type' => 'required|string|in:checkup,emergency,follow-up,consult',
+    ]);
+
+    $appointment = Appointments::find($id);
+    if (!$appointment) {
+        return response()->json(['success' => false, 'message' => 'Appointment not found']);
+    }
+
+    // ✅ Merge Date & Time Correctly
+    $appointment->date_time = Carbon::parse($request->appointment_date . ' ' . $request->appointment_time);
+    $appointment->appointment_type = $request->appointment_type;
+
+    $appointment->save();
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Appointment details updated successfully!',
+        'appointment' => $appointment
+    ], 200);
+    }
 
 
 }
