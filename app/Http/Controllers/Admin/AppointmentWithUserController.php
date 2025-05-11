@@ -123,9 +123,9 @@ class AppointmentWithUserController extends Controller
 
  public function updateAppointmentDetails(Request $request, $id) {
     $request->validate([
-        'appointment_date' => 'required|date|after_or_equal:today',
-        'appointment_time' => 'required|date_format:H:i',
-        'appointment_type' => 'required|string|in:checkup,emergency,follow-up,consult',
+        'appointment_date' => 'sometimes|date|after_or_equal:today',
+        'appointment_time' => 'sometimes|date_format:H:i',
+        'appointment_type' => 'sometimes|string|in:checkup,emergency,follow-up,consult',
     ]);
 
     $appointment = Appointments::find($id);
@@ -145,6 +145,5 @@ class AppointmentWithUserController extends Controller
         'appointment' => $appointment
     ], 200);
     }
-
 
 }
